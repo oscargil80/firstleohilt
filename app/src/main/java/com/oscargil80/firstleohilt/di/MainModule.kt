@@ -12,6 +12,8 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object MainModule {
 
+
+
     @Singleton
     @Provides
     fun provideMiInterface():MiInterface{
