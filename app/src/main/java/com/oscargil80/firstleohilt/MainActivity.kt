@@ -1,37 +1,51 @@
 package com.oscargil80.firstleohilt
 
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.qualifiers.ApplicationContext
+import retrofit2.Retrofit
 import javax.inject.Inject
+import javax.inject.Named
+import javax.inject.Singleton
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-
     @Inject
    lateinit var miInterface:MiInterface
+
+   @Inject
+   lateinit var retrofit: Retrofit
+
+   @Inject
+   @Named("Frase2")
+   lateinit var frase : String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //var clase1= Clase1()
-        //var clase2 = Clase2(clase1)
-        miInterface.mostrartexto()
+       Log.d("MainActivity", "Texto $frase ")
     }
+
 }
 
-/*class Clase1
-@Inject
-   constructor()
- {
-        fun enviartexto(): String{
-            return  "Texto Enviado"
-        }
+
+
+
+
+
+
+/*@Singleton
+ class Clase2
+ @Inject constructor()  {
+    fun mostrarTexto() {
+       // Log.Timber.tag("MainActivity").d("Concatenando ")
+    }
 }*/
 
  class MiInterfaceImpl
@@ -44,19 +58,19 @@ constructor():MiInterface
  }
 
 
-/* class Clase2
- @Inject
-constructor(
- //val clase1: Clase1
-@ApplicationContext  val context: Context
-)
- {
-    fun mostrarTexto(){
-        Log.d("MainActivity", "Concatenando ${context.getString(R.string.prueba)} ")
-    }
-}*/
+
 
 interface MiInterface{
     fun mostrartexto()
-
 }
+/*class Clase1
+@Inject
+   constructor()
+ {
+        fun enviartexto(): String{
+            return  "Texto Enviado"
+        }
+}*/
+
+
+
