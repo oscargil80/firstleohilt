@@ -4,10 +4,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.oscargil80.firstleohilt.databinding.ActivitySecondBinding
-import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
+//import dagger.hilt.android.AndroidEntryPoint
+//import javax.inject.Inject
 
-@AndroidEntryPoint
+//@AndroidEntryPoint
 class SecondActivity : AppCompatActivity() {
  /*   @Inject
     lateinit var clase2: Clase2

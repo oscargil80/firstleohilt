@@ -5,31 +5,33 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.qualifiers.ApplicationContext
+import androidx.activity.viewModels
+import com.oscargil80.firstleohilt.databinding.ActivityMainBinding
 import retrofit2.Retrofit
-import javax.inject.Inject
-import javax.inject.Named
-import javax.inject.Singleton
 
-@AndroidEntryPoint
+
+//@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+    lateinit var  binding : ActivityMainBinding
+    val viewmodel: mainViewModel by viewModels()
 
-    @Inject
+    //@Inject
    lateinit var miInterface:MiInterface
 
-   @Inject
+   //@Inject
    lateinit var retrofit: Retrofit
 
-   @Inject
-   @Named("Frase2")
+   //@Inject
+   //@Named("Frase2")
    lateinit var frase : String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
 
-       Log.d("MainActivity", "Texto $frase ")
+        setContentView(binding.root)
+
+      // Log.d("MainActivity", "Texto $frase ")
     }
 
 }
@@ -49,7 +51,7 @@ class MainActivity : AppCompatActivity() {
 }*/
 
  class MiInterfaceImpl
- @Inject
+ //@Inject
 constructor():MiInterface
  {
      override fun mostrartexto() {
