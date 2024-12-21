@@ -1,5 +1,6 @@
 package com.oscargil80.firstleohilt
 
+import androidx.lifecycle.LiveData
 import com.oscargil80.firstleohilt.Model.Word
 import com.oscargil80.firstleohilt.database.WordDAO
 
@@ -10,7 +11,7 @@ class WordRepositoryImpl(
         return wordDao.insertWord(word)
     }
 
-    override suspend fun getAllWords(): List<Word> {
+    override  fun getAllWords(): LiveData<List<Word>> {
         return wordDao.getAllWords()
     }
 }

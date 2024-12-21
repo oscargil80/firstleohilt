@@ -5,73 +5,54 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.input.input
+import com.oscargil80.firstleohilt.Adapter.WordAdapter
 import com.oscargil80.firstleohilt.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
 class WordsActivity : AppCompatActivity() {
-    lateinit var  binding : ActivityMainBinding
+    lateinit var binding: ActivityMainBinding
     val viewmodel: WordsViewModel by viewModels()
+    lateinit var adapter: WordAdapter
 
-     override fun onCreate(savedInstanceState: Bundle?) {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding.btnWords.setOnClickListener { showAddWords() }
+        setRecyclerView()
+        viewmodel.getAllWords().observe(this, Observer {
+            adapter.submitList(it)
+        })
 
-  binding.btnWords.setOnClickListener { showAddWords() }
+    }
 
+    private fun setRecyclerView() {
+        binding.rvWords.apply {
+            adapter = WordAdapter()
+            layoutManager = LinearLayoutManager(this@WordsActivity)
+            adapter = adapter
+
+        }
     }
 
     private fun showAddWords() {
         MaterialDialog(this).show {
             input { dialog, text ->
-                //viewModel.saveWord(text.toString())
+                viewmodel.saveWord(text.toString())
             }
-            positiveButton( text = "Submit")
+            positiveButton(text = "Submit")
         }
     }
 
 }
 
 
-
-
-
-
-
-/*@Singleton
- class Clase2
- @Inject constructor()  {
-    fun mostrarTexto() {
-       // Log.Timber.tag("MainActivity").d("Concatenando ")
-    }
-}*/
-
- class MiInterfaceImpl
- //@Inject
-constructor():MiInterface
- {
-     override fun mostrartexto() {
-         Log.d("MainActivity", "Texto con interface ")
-     }
- }
-
-
-
-
-interface MiInterface{
-    fun mostrartexto()
-}
-/*class Clase1
-@Inject
-   constructor()
- {
-        fun enviartexto(): String{
-            return  "Texto Enviado"
-        }
-}*/
 
 
 
