@@ -1,37 +1,36 @@
 package com.oscargil80.firstleohilt
 
-import android.content.Context
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
+import androidx.databinding.DataBindingUtil
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.input.input
 import com.oscargil80.firstleohilt.databinding.ActivityMainBinding
-import retrofit2.Retrofit
+import dagger.hilt.android.AndroidEntryPoint
 
 
-//@AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+@AndroidEntryPoint
+class WordsActivity : AppCompatActivity() {
     lateinit var  binding : ActivityMainBinding
-    val viewmodel: mainViewModel by viewModels()
+    val viewmodel: WordsViewModel by viewModels()
 
-    //@Inject
-   lateinit var miInterface:MiInterface
-
-   //@Inject
-   lateinit var retrofit: Retrofit
-
-   //@Inject
-   //@Named("Frase2")
-   lateinit var frase : String
-
-    override fun onCreate(savedInstanceState: Bundle?) {
+     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        setContentView(binding.root)
+  binding.btnWords.setOnClickListener { showAddWords() }
 
-      // Log.d("MainActivity", "Texto $frase ")
+    }
+
+    private fun showAddWords() {
+        MaterialDialog(this).show {
+            input { dialog, text ->
+                //viewModel.saveWord(text.toString())
+            }
+            positiveButton( text = "Submit")
+        }
     }
 
 }
