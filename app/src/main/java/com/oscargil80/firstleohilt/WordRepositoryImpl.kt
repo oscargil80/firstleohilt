@@ -7,6 +7,7 @@ import com.oscargil80.firstleohilt.database.WordDAO
 class WordRepositoryImpl(
     private val wordDao: WordDAO
 ) : WordRepository {
+
     override suspend fun insertWords(word: Word) {
         return wordDao.insertWord(word)
     }

@@ -18,28 +18,28 @@ import dagger.hilt.android.AndroidEntryPoint
 class WordsActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
     val viewmodel: WordsViewModel by viewModels()
-    lateinit var adapter: WordAdapter
 
+     lateinit var adapter: WordAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        binding.btnWords.setOnClickListener { showAddWords() }
         setRecyclerView()
+        binding.btnWords.setOnClickListener { showAddWords() }
+
         viewmodel.getAllWords().observe(this, Observer {
-            adapter.submitList(it)
+         adapter.submitList(it)
         })
 
     }
 
     private fun setRecyclerView() {
-        binding.rvWords.apply {
-            adapter = WordAdapter()
-            layoutManager = LinearLayoutManager(this@WordsActivity)
-            adapter = adapter
-
+        adapter = WordAdapter()
+        binding.rvWords.layoutManager = LinearLayoutManager(this@WordsActivity)
+        binding.rvWords.adapter = adapter
         }
-    }
+
+
 
     private fun showAddWords() {
         MaterialDialog(this).show {

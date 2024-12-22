@@ -6,10 +6,10 @@ import com.oscargil80.firstleohilt.Model.Word
 import com.oscargil80.firstleohilt.databinding.ItemWordBinding
 
 class WordViewHolder(
-     view: View
-) : RecyclerView.ViewHolder(view) {
+    private val binding : ItemWordBinding
+) : RecyclerView.ViewHolder(binding.root) {
 
-    private var binding = ItemWordBinding.bind(view)
+    //private var binding = ItemWordBinding.bind(view)
 
     fun render(
         word: Word
